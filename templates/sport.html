@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sport Motorbikes</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<h1>Sport Motorbikes</h1>
+<ul class="navigation">
+    <li><a href="/">Home</a></li>
+    <li><a href="/motorbikes">Motorbikes</a></li>
+    <li><a href="/sport">Sport</a></li>
+    <li><a href="/naked">Naked</a></li>
+    <li><a href="/touring">Touring</a></li>
+    <li><a href="/lams">LAMS</a></li>
+</ul>
+<form method="POST" action="/search">
+    <label for="search">Search motorbikes:</label>
+    <input type="text" name="search" id="search" placeholder="Search">
+    <input type="submit" value="Search">
+</form>
+<div class="table-container">
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Manufacturer</th>
+        <th>CC</th>
+        <th>LAMS</th>
+        <th>Production Country</th>
+        <th>Cost (NZD)</th>
+        <th>Quickshifter</th>
+        <th>Type</th>
+    </tr>
+    {% for bike in bikes %}
+        <tr>
+            <td>{{ bike[0] }}</td>
+            <td>{{ bike[1] }}</td>
+            <td>{{ bike[2] }}</td>
+            <td>{{ bike[3] }}</td>
+            <td>{{ "%g"|format(bike[4]) }}</td>
+            <td>{{ bike[5] }}</td>
+            <td>{{ bike[6] }}</td>
+            <td>${{ "{:,.2f}".format(bike[7]) }}</td>
+            <td>{{ bike[8] }}</td>
+            <td>{{ bike[9] }}</td>
+        </tr>
+    {% endfor %}
+</table>
+</div>
+{% if not bikes %}
+<p>No motorbikes found.</p>
+{% endif %}
+</body>
+</html>

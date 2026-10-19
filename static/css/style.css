@@ -1,0 +1,133 @@
+body{
+    background-color: sandybrown;
+    font-family: "Roboto Light", Arial, sans-serif;
+    margin: 20px;
+    line-height: 1.5;
+}
+h1{
+    margin-bottom: 10px;
+}
+a{
+    color: #302014;
+}
+.navigation{
+    padding: 10px;
+    border: 1px solid black;
+}
+.navigation li{
+    display: inline-block;
+    margin-right: 20px;
+}
+form{
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px 0;
+}
+.filter-field{
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 15px 12px 0;
+}
+.filter-field label{
+    display: block;
+    margin-bottom: 4px;
+}
+input, select{
+    font: inherit;
+    padding: 4px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+.filter-field input, .filter-field select{
+    width: 190px;
+}
+input[type="submit"]{
+    cursor: pointer;
+}
+.table-container{
+    overflow-x: auto;
+}
+table{
+    width: 100%;
+}
+table, th, td{
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+th, td{
+    padding: 7px;
+    text-align: left;
+}
+th{
+    background-color: #e39b5b;
+}
+dt{
+    font-weight: bold;
+}
+dd{
+    margin: 0 0 8px 20px;
+}
+hr{
+    border: 0;
+    border-top: 1px solid black;
+}
+.error{
+    font-weight: bold;
+    color: #701515;
+}
+@media (max-width: 600px){
+    body{
+        margin: 10px;
+    }
+    .navigation li{
+        margin: 3px 12px 3px 0;
+    }
+    .filter-field{
+        display: block;
+        margin-right: 0;
+    }
+    .filter-field input, .filter-field select{
+        width: 100%;
+    }
+}
+
+.lams-bike{
+    display: inline-block;
+    vertical-align: top;
+    width: 340px;
+    max-width: 100%;
+    box-sizing: border-box;
+    border: 1px solid black;
+    padding: 12px;
+    margin: 0 12px 16px 0;
+}
+.lams-bike h2{
+    font-size: 20px;
+    margin: 0 0 12px;
+    overflow-wrap: anywhere;
+}
+.lams-bike dl{
+    margin: 0;
+}
+.lams-bike dt{
+    float: left;
+    clear: left;
+    width: 145px;
+}
+.lams-bike dd{
+    margin: 0 0 6px 150px;
+    overflow-wrap: anywhere;
+}
+@media (max-width: 400px){
+    .lams-bike{
+        width: 100%;
+        margin-right: 0;
+    }
+    .lams-bike dt{
+        float: none;
+        width: auto;
+    }
+    .lams-bike dd{
+        margin-left: 0;
+    }
+}

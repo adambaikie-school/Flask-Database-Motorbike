@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Motorbikes</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<h1>Motorbikes</h1>
+<ul class="navigation">
+    <li><a href="/">Home</a></li>
+    <li><a href="/motorbikes">Motorbikes</a></li>
+    <li><a href="/sport">Sport</a></li>
+    <li><a href="/naked">Naked</a></li>
+    <li><a href="/touring">Touring</a></li>
+    <li><a href="/lams">LAMS</a></li>
+</ul>
+<h2>Search and filters</h2>
+<form method="GET" action="/motorbikes">
+    <div class="filter-field">
+    <label for="search">Search:</label>
+    <input type="text" name="search" id="search" value="{{ filters.search }}" placeholder="Model, manufacturer or country">
+    </div>
+    
+    <div class="filter-field">
+    <label for="manufacturer">Manufacturer:</label>
+    <select name="manufacturer" id="manufacturer">
+        <option value="">All</option>
+        {% for manufacturer in manufacturers %}
+        <option value="{{ manufacturer[0] }}" {% if filters.manufacturer == manufacturer[0] %}selected{% endif %}>{{ manufacturer[0] }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    <div class="filter-field">
+    <label for="type">Type:</label>
+    <select name="type" id="type">
+        <option value="">All</option>
+        {% for type in types %}
+        <option value="{{ type[0] }}" {% if filters.type == type[0] %}selected{% endif %}>{{ type[0] }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    <div class="filter-field">
+    <label for="year">Year:</label>
+    <select name="year" id="year">
+        <option value="">All</option>
+        {% for year in years %}
+        <option value="{{ year[0] }}" {% if filters.year == year[0]|string %}selected{% endif %}>{{ year[0] }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    <div class="filter-field">
+    <label for="lams">LAMS:</label>
+    <select name="lams" id="lams">
+        <option value="">All</option>
+        <option value="Yes" {% if filters.lams == 'Yes' %}selected{% endif %}>Yes</option>
+        <option value="No" {% if filters.lams == 'No' %}selected{% endif %}>No</option>
+    </select>
+    </div>
+    <div class="filter-field">
+    <label for="quickshifter">Quickshifter:</label>
+    <select name="quickshifter" id="quickshifter">
+        <option value="">All</option>
+        {% for quickshifter in quickshifters %}
+        <option value="{{ quickshifter[0] }}" {% if filters.quickshifter == quickshifter[0] %}selected{% endif %}>{{ quickshifter[0] }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    
+    <div class="filter-field">
+    <label for="min_price">Minimum price (NZD):</label>
+    <input type="number" name="min_price" id="min_price" min="0" step="0.01" value="{{ filters.min_price }}">
+    </div>
+    <div class="filter-field">
+    <label for="max_price">Maximum price (NZD):</label>
+    <input type="number" name="max_price" id="max_price" min="0" step="0.01" value="{{ filters.max_price }}">
+    </div>
+    
+    <div class="filter-field">
+    <label for="min_cc">Minimum CC:</label>
+    <input type="number" name="min_cc" id="min_cc" min="0" step="any" value="{{ filters.min_cc }}">
+    </div>
+    <div class="filter-field">
+    <label for="max_cc">Maximum CC:</label>
+    <input type="number" name="max_cc" id="max_cc" min="0" step="any" value="{{ filters.max_cc }}">
+    </div>
+    
+    <div class="filter-field">
+    <label for="sort">Sort by:</label>
+    <select name="sort" id="sort">
+        {% for value, label in [('model', 'Model A-Z'), ('price_low', 'Price lowest first'), ('price_high', 'Price highest first'), ('cc_low', 'CC lowest first'), ('cc_high', 'CC highest first'), ('year', 'Newest year first')] %}
+        <option value="{{ value }}" {% if filters.sort == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    <input type="submit" value="Search and filter">
+    <a href="/motorbikes">Clear filters</a>
+</form>
+{% for error in errors %}
+<p class="error">{{ error }}</p>
+{% endfor %}
+<p>{{ bikes|length }} motorbikes found.</p>
+<div class="table-container">
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Manufacturer</th>
+        <th>CC</th>
+        <th>LAMS</th>
+        <th>Production Country</th>
+        <th>Cost (NZD)</th>
+        <th>Quickshifter</th>
+        <th>Type</th>
+    </tr>
+    {% for bike in bikes %}
+        <tr>
+            <td>{{ bike[0] }}</td>
+            <td>{{ bike[1] }}</td>
+            <td>{{ bike[2] }}</td>
+            <td>{{ bike[3] }}</td>
+            <td>{{ "%g"|format(bike[4]) }}</td>
+            <td>{{ bike[5] }}</td>
+            <td>{{ bike[6] }}</td>
+            <td>${{ "{:,.2f}".format(bike[7]) }}</td>
+            <td>{{ bike[8] }}</td>
+            <td>{{ bike[9] }}</td>
+        </tr>
+    {% endfor %}
+</table>
+</div>
+{% if not bikes %}
+<p>No motorbikes found.</p>
+{% endif %}
+</body>
+</html>

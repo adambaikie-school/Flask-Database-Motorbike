@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LAMS Motorbikes</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<h1>LAMS Motorbikes</h1>
+<ul class="navigation">
+    <li><a href="/">Home</a></li>
+    <li><a href="/motorbikes">Motorbikes</a></li>
+    <li><a href="/sport">Sport</a></li>
+    <li><a href="/naked">Naked</a></li>
+    <li><a href="/touring">Touring</a></li>
+    <li><a href="/lams">LAMS</a></li>
+</ul>
+<form method="GET" action="/lams">
+    <label for="search">Search LAMS motorbikes:</label>
+    <input type="text" name="search" id="search" value="{{ search }}" placeholder="Model or manufacturer">
+    <input type="submit" value="Search">
+    <a href="/lams">Clear search</a>
+</form>
+<p>Browse motorbikes marked as LAMS in the database, sorted alphabetically by model.</p>
+<p>{{ bikes|length }} motorbikes found.</p>
+{% for bike in bikes %}
+<div class="lams-bike">
+<h2>{{ bike[3] }} {{ bike[1] }}</h2>
+<dl>
+    <dt>ID</dt><dd>{{ bike[0] }}</dd>
+    <dt>Year</dt><dd>{{ bike[2] }}</dd>
+    <dt>Engine size</dt><dd>{{ "%g"|format(bike[4]) }} cc</dd>
+    <dt>LAMS</dt><dd>{{ bike[5] }}</dd>
+    <dt>Production country</dt><dd>{{ bike[6] }}</dd>
+    <dt>Cost (NZD)</dt><dd>${{ "{:,.2f}".format(bike[7]) }}</dd>
+    <dt>Quickshifter</dt><dd>{{ bike[8] }}</dd>
+    <dt>Type</dt><dd>{{ bike[9] }}</dd>
+</dl>
+</div>
+{% endfor %}
+{% if not bikes %}
+<p>No LAMS motorbikes found. Try a different search or clear the search.</p>
+{% endif %}
+</body>
+</html>
