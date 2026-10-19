@@ -31,7 +31,7 @@
     <dt>ID</dt><dd>{{ bike[0] }}</dd>
     <dt>Year</dt><dd>{{ bike[2] }}</dd>
     <dt>Engine size</dt><dd>{{ "%g"|format(bike[4]) }} cc</dd>
-    <dt>LAMS</dt><dd>{{ bike[5] }}</dd>
+    <dt>LAMS</dt><dd>{{ 'Yes' if bike[5] else 'No' }}</dd>
     <dt>Production country</dt><dd>{{ bike[6] }}</dd>
     <dt>Cost (NZD)</dt><dd>${{ "{:,.2f}".format(bike[7]) }}</dd>
     <dt>Quickshifter</dt><dd>{{ bike[8] }}</dd>

@@ -45,7 +45,7 @@ def render_motorbikes():
     for field, column in [('manufacturer', 'Manufacturer'), ('type', 'Type'), ('year', 'Year'), ('lams', 'LAMS'), ('quickshifter', 'Quickshifter')]:
         if filters[field]:
             conditions.append(column + ' = ?')
-            parameters.append(filters[field])
+            parameters.append({'Yes': 1, 'No': 0}.get(filters[field], filters[field]) if field == 'lams' else filters[field])
 
     numbers = {}
     for field, column, comparison, label in [('min_price', '"Cost (NZD)"', '>=', 'Minimum price'), ('max_price', '"Cost (NZD)"', '<=', 'Maximum price'), ('min_cc', 'CC', '>=', 'Minimum CC'), ('max_cc', 'CC', '<=', 'Maximum CC')]:
@@ -106,7 +106,7 @@ def render_touring():
 def render_lams():
     search = request.args.get('search', '').strip()
     query = 'SELECT ' + BIKE_COLUMNS + ' FROM Motorcycle WHERE LAMS = ?'
-    parameters = ['Yes']
+    parameters = [1]
     if search:
         query += ' AND ("Bike Model" LIKE ? OR Manufacturer LIKE ? OR Type LIKE ? OR "Production Country" LIKE ?)'
         parameters.extend(['%' + search + '%'] * 4)

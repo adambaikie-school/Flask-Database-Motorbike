@@ -42,7 +42,7 @@
             <td>{{ bike[2] }}</td>
             <td>{{ bike[3] }}</td>
             <td>{{ "%g"|format(bike[4]) }}</td>
-            <td>{{ bike[5] }}</td>
+            <td>{{ 'Yes' if bike[5] else 'No' }}</td>
             <td>{{ bike[6] }}</td>
             <td>${{ "{:,.2f}".format(bike[7]) }}</td>
             <td>{{ bike[8] }}</td>
